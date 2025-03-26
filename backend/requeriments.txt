@@ -1,0 +1,7 @@
+requests
+beautifulsoup4
+pdfplumber
+pandas
+mysql-connector-python
+fastapi
+uvicorn
