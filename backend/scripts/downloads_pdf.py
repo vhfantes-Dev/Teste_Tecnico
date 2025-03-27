@@ -12,24 +12,23 @@ def baixar_pdfs():
     # Coletar todos os links de PDF
     pdf_links = [link["href"] for link in soup.find_all("a", href=True) if link["href"].endswith(".pdf")]
     
-    # Exibir todos os links de PDF para depuração
-    print(f"Todos os links de PDF encontrados: {pdf_links}")
 
     # Filtrar links que contêm "Anexo I" ou "Anexo II"
     anexos = ["Anexo_I", "Anexo_II"]
     pdf_links_filtrados = [link for link in pdf_links if any(anexo.lower() in link.lower() for anexo in anexos)]
     
-    # Exibir links filtrados para depuração
     print(f"Links filtrados: {pdf_links_filtrados}")
 
     baixados = []
+
+    download_dir = os.path.join("data", "downloads") # selecionando onde será mandado os pdf baixados
 
     for link in pdf_links_filtrados:
         if not link.startswith("http"):
             link = "https://www.gov.br" + link
 
         file_name = link.split("/")[-1]
-        file_path = os.path.join("data/downloads", file_name)
+        file_path = os.path.join(download_dir, file_name)
 
         pdf_response = requests.get(link)
         pdf_response.raise_for_status()
