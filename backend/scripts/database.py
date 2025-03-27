@@ -4,6 +4,7 @@ from config import DB_CONFIG
 import zipfile
 import os
 import csv
+from tabulate import tabulate
 
 DIR_CONTABEIS = "C:/Users/vitor/Desktop/Teste_Tecnico/backend/data/dados_contabeis"
 DIR_OPERADORAS = "C:/Users/vitor/Desktop/Teste_Tecnico/backend/data/op_ativas"
@@ -136,3 +137,53 @@ def importar_csv_operadoras():
     finally:
         cursor.close()
         conn.close()
+def executar_consultas():
+    conn = mysql.connector.connect(**DB_CONFIG)
+    cursor = conn.cursor()
+    
+
+    consulta_trimestre = """
+      SELECT 
+      reg_ans, 
+      SUM(vl_saldo_final) AS total_despesas
+      FROM demonstracoes_contabeis
+      WHERE data_referencia >= NOW() - INTERVAL 3 MONTH
+      AND (descricao LIKE '%sinistro%' 
+      OR descricao LIKE '%evento%' 
+      OR descricao LIKE '%assistência%' 
+      OR descricao LIKE '%saúde%')
+      GROUP BY reg_ans
+      ORDER BY total_despesas DESC
+    LIMIT 10;
+
+    """
+    print("📊 Top 10 operadoras (último trimestre):")
+    cursor.execute(consulta_trimestre)
+    resultados_trimestre = cursor.fetchall()
+    colunas_trimestre = [desc[0] for desc in cursor.description]
+    print(tabulate(resultados_trimestre, headers=colunas_trimestre, tablefmt='grid'))
+    
+    consulta = """
+        SELECT 
+            reg_ans, 
+            SUM(vl_saldo_final) AS total_despesas
+        FROM demonstracoes_contabeis
+        WHERE data_referencia >= NOW() - INTERVAL 1 YEAR
+        AND (descricao LIKE '%sinistro%' 
+            OR descricao LIKE '%evento%' 
+            OR descricao LIKE '%assistência%' 
+            OR descricao LIKE '%saúde%')
+        GROUP BY reg_ans
+        ORDER BY total_despesas DESC
+        LIMIT 10;
+        """
+
+    cursor.execute(consulta)
+    resultados = cursor.fetchall()
+    colunas = [desc[0] for desc in cursor.description]
+    
+    print("📊 Top 10 operadoras (último ano):")
+    print(tabulate(resultados, headers=colunas, tablefmt='grid'))
+
+    cursor.close()
+    conn.close()
