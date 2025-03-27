@@ -6,6 +6,7 @@ from extract_data import processar_pdf
 from database import extrair_zip
 from database import importar_csv_contabeis
 from database import importar_csv_operadoras
+from database import executar_consultas
 
 def main():
     print("🔍 Iniciando o download dos PDFs...")
@@ -27,6 +28,8 @@ def main():
 
     print("\n🔄 Iniciando importação de arquivos CSV de operadoras...")
     importar_csv_operadoras()
+    #Chamando as consultas analiticas
+    executar_consultas()
     
 if __name__ == "__main__":
     main()
