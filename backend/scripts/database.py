@@ -65,6 +65,7 @@ def criar_tabelas(): # criação das tabelas
     print("✅ Tabelas criadas com sucesso!")
 
 def processar_csv(csv_path, query, campos, cursor):
+<<<<<<< HEAD
     with open(csv_path, 'r', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile, delimiter=';')
         next(reader)  
@@ -72,15 +73,35 @@ def processar_csv(csv_path, query, campos, cursor):
         
         for row in reader:
             row_tratada = [None if valor == '' else valor for valor in row] # Substitui valor vazio por none
+=======
+    """Processa os arquivos CSV em lotes para importação no banco de dados."""
+    with open(csv_path, 'r', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
+        next(reader)  # Ignora o cabeçalho
+        dados = []
+        
+        for row in reader:
+            # Substitui valores vazios (ou faltando) por None
+            row_tratada = [None if valor == '' else valor for valor in row]
+            
+            # Verifica se o número de campos está correto
+>>>>>>> a19cb570d441e6249cfb54cb73d2ccce535b7641
             if len(row_tratada) == campos:
                 dados.append(tuple(row_tratada))
             else:
                 print(f"Erro na linha {reader.line_num}: número de colunas inválido.")
             
+<<<<<<< HEAD
             # Limitando o fluxo de dados
             if len(dados) >= 20000:
                 cursor.executemany(query, dados)
                 dados.clear()
+=======
+            # Limite o tamanho do lote para 20000 (ajuste conforme necessário)
+            if len(dados) >= 20000:
+                cursor.executemany(query, dados)
+                dados.clear()  # Limpa os dados para o próximo lote
+>>>>>>> a19cb570d441e6249cfb54cb73d2ccce535b7641
                 print(f"✅ Lote de 20000 registros de {csv_path} importado.")
         
         # Insere os dados restantes (caso haja menos de 20000 registros)
@@ -89,10 +110,20 @@ def processar_csv(csv_path, query, campos, cursor):
             print(f"✅ Dados restantes de {csv_path} importados.")
 
 def importar_csv_contabeis():
+<<<<<<< HEAD
+=======
+    """Importa os arquivos CSV da pasta de dados contábeis para o banco de dados MySQL."""
+>>>>>>> a19cb570d441e6249cfb54cb73d2ccce535b7641
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
 
+<<<<<<< HEAD
+=======
+        # Desabilita auto-commit para melhorar a performance
+        conn.autocommit = False
+
+>>>>>>> a19cb570d441e6249cfb54cb73d2ccce535b7641
         for arquivo in os.listdir(DIR_CONTABEIS):
             if arquivo.endswith(".csv"):
                 csv_path = os.path.join(DIR_CONTABEIS, arquivo)
@@ -100,9 +131,15 @@ def importar_csv_contabeis():
                     INSERT INTO demonstracoes_contabeis (data_referencia, reg_ans, cd_conta_contabil, descricao, vl_saldo_inicial, vl_saldo_final)
                     VALUES (%s, %s, %s, %s, %s, %s)
                 """
+<<<<<<< HEAD
                 processar_csv(csv_path, query, 6, cursor)
 
         conn.commit()  
+=======
+                processar_csv(csv_path, query, 6, cursor)  # São 6 campos para cada linha
+
+        conn.commit()  # Confirma todas as transações de uma vez
+>>>>>>> a19cb570d441e6249cfb54cb73d2ccce535b7641
         print("✅ Todos os arquivos CSV foram importados com sucesso.")
         
     except Error as e:
@@ -112,11 +149,22 @@ def importar_csv_contabeis():
         conn.close()
 
 def importar_csv_operadoras():
+<<<<<<< HEAD
     try:
         conn = mysql.connector.connect(**DB_CONFIG)
         cursor = conn.cursor()
         
         
+=======
+    """Importa os arquivos CSV da pasta de operadoras para o banco de dados MySQL."""
+    try:
+        conn = mysql.connector.connect(**DB_CONFIG)
+        cursor = conn.cursor()
+
+        # Desabilita auto-commit para melhorar a performance
+        conn.autocommit = False
+
+>>>>>>> a19cb570d441e6249cfb54cb73d2ccce535b7641
         for arquivo in os.listdir(DIR_OPERADORAS):
             if arquivo.endswith(".csv"):
                 csv_path = os.path.join(DIR_OPERADORAS, arquivo)
@@ -126,9 +174,15 @@ def importar_csv_operadoras():
                     representante, cargo_representante, regiao_comercializacao, data_registro_ans)
                     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
+<<<<<<< HEAD
                 processar_csv(csv_path, query, 20, cursor)
 
         conn.commit()
+=======
+                processar_csv(csv_path, query, 20, cursor)  # São 19 campos para cada linha
+
+        conn.commit()  # Confirma todas as transações de uma vez
+>>>>>>> a19cb570d441e6249cfb54cb73d2ccce535b7641
         print("✅ Todos os arquivos CSV de operadoras foram importados com sucesso.")
         
     except Error as e:
