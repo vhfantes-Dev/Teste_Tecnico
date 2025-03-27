@@ -9,7 +9,7 @@ DIR_CONTABEIS = "C:/Users/vitor/Desktop/Teste_Tecnico/backend/data/dados_contabe
 DIR_OPERADORAS = "C:/Users/vitor/Desktop/Teste_Tecnico/backend/data/op_ativas"
 
 def extrair_zip():
-    # Extração dos arquivos ZIP da pasta dados_contabeis
+    # Extração dos arquivos em ZIP da pasta dados_contabeis
     for zip_file in os.listdir(DIR_CONTABEIS):
         if zip_file.endswith(".zip"):
             zip_path = os.path.join(DIR_CONTABEIS, zip_file)
