@@ -16,12 +16,14 @@ Para baixar os requisitos use o comando:
 ```sh
 pip install -r requeriments.txt
 ``` 
+**(o arquivo requeriments.txt já está na pasta backend)**
 
+---
 ### ⚠️ ATENÇÃO!
 ### O PASSO ACIMA É MUITO IMPORTANTE, SEM ELE VAI ACARRETAR A MUITOS ERROS
 ### CASO NÃO TENHA O PIP, INSTALE  
+---
 
-(o arquivo requeriments.txt já está na pasta backend)
 
 
 ## Rodando o main.py
