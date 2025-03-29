@@ -12,10 +12,11 @@ cd backend
 ### Após entrar no diretório backend siga o próximo passo
 
 ## Instalando os requisitos
-Para baixar os requisitos use o comando(eles já estão na pasta backend)
+Para baixar os requisitos use o comando:
 ```sh
 pip install -r requeriments.txt
 ```
+(o arquivo já estão na pasta backend)
 ## ⚠️ ATENÇÃO!
 ## O PASSO ACIMA É MUITO IMPORTANTE, SEM ELE VAI ACARRETAR A MUITOS ERROS
 ## CASO NÃO TENHA O PIP, INSTALE  
