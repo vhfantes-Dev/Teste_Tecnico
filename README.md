@@ -16,9 +16,9 @@ Para baixar os requisitos use o comando(eles já estão na pasta backend)
 ```sh
 pip install -r requeriments.txt
 ```
-## ⚠️ ATENÇÃO!
-## O PASSO ACIMA É MUITO IMPORTANTE, SEM ELE VAI ACARRETAR A MUITOS ERROS
-## CASO NÃO TENHA O PIP, INSTALE  
+### ⚠️ ATENÇÃO!
+### O PASSO ACIMA É MUITO IMPORTANTE, SEM ELE VAI ACARRETAR A MUITOS ERROS
+### CASO NÃO TENHA O PIP, INSTALE  
 
 ## Rodando o main.py
 Para rodar o aquivo principal main.py precisamos utilizar este comando
