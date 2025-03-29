@@ -12,13 +12,20 @@ cd backend
 ### Após entrar no diretório backend siga o próximo passo
 
 ## Instalando os requisitos
-Para baixar os requisitos use o comando(eles já estão na pasta backend)
+Para baixar os requisitos use o comando:
 ```sh
 pip install -r requeriments.txt
 ```
+<<<<<<< HEAD
 ### ⚠️ ATENÇÃO!
 ### O PASSO ACIMA É MUITO IMPORTANTE, SEM ELE VAI ACARRETAR A MUITOS ERROS
 ### CASO NÃO TENHA O PIP, INSTALE  
+=======
+(o arquivo requeriments.txt já está na pasta backend)
+## ⚠️ ATENÇÃO!
+## O PASSO ACIMA É MUITO IMPORTANTE, SEM ELE VAI ACARRETAR A MUITOS ERROS
+## CASO NÃO TENHA O PIP, INSTALE  
+>>>>>>> 1b4eafc4f0bccf42bf82234c6c7defc215fdd709
 
 ## Rodando o main.py
 Para rodar o aquivo principal main.py precisamos utilizar este comando
